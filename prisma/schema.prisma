@@ -1,0 +1,88 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model User {
+  id              Int     @id @default(autoincrement())
+  email           String?  @unique
+  name            String
+  lastname        String?
+  second_lastname String?
+  password        String?
+
+  institutions UsersInstitutions[]
+  lists UsersLists[]
+  templateLists UsersTemplateLists[]
+}
+
+model Institution {
+  id              Int     @id @default(autoincrement())
+  slug            String  @unique
+  name            String
+
+  users UsersInstitutions[]
+}
+
+model UsersInstitutions {
+  user          User     @relation(fields: [userId], references: [id])
+  userId        Int
+  institution   Institution @relation(fields: [institutionId], references: [id])
+  institutionId Int
+  assignedAt    DateTime @default(now())
+  assignedBy    String
+
+  @@id([institutionId, userId])
+}
+
+model List {
+  id              Int     @id @default(autoincrement())
+  date            DateTime @default(now())
+  name            String
+  description     String
+  url             String @default("")
+
+  users UsersLists[]
+}
+
+model TemplateList {
+  id              Int     @id @default(autoincrement())
+  date            DateTime @default(now())
+  name            String
+  description     String
+
+  users UsersTemplateLists[]
+}
+
+model UsersLists {
+  id            Int     @id @default(autoincrement())
+  user          User     @relation(fields: [userId], references: [id])
+  userId        Int
+  list          List @relation(fields: [listId], references: [id])
+  listId        Int
+  status        Int
+  assignedAt    DateTime @default(now())
+  assignedBy    String
+
+  @@unique([userId, listId])
+}
+
+model UsersTemplateLists {
+  id                    Int     @id @default(autoincrement())
+  user                  User     @relation(fields: [userId], references: [id])
+  userId                Int
+  templateList          TemplateList @relation(fields: [templateListId], references: [id])
+  templateListId        Int
+  assignedAt            DateTime @default(now())
+  assignedBy            String
+
+  @@unique([userId, templateListId])
+}
