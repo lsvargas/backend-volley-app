@@ -2,13 +2,14 @@ FROM node:16.0.0
 
 WORKDIR /app
 
-COPY package.json /app
+COPY package.json ./
+COPY yarn.lock ./
 
-COPY prisma ./app/prisma/
+COPY prisma ./prisma/
 
 RUN yarn install
 
-COPY . /app
+COPY . .
 
 EXPOSE 4000
 

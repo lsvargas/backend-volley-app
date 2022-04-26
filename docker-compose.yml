@@ -2,9 +2,7 @@ version: '3.9'
 
 services: 
   postgres:
-    build:
-      context: ./postgresdb
-      dockerfile: Dockerfile
+    image: postgres
     restart: always
     environment:
       - POSTGRES_USER=postgres
@@ -16,11 +14,11 @@ services:
 
   backend:
     build:
-      context: ./api
+      context: .
       dockerfile: Dockerfile
-    volumes:
-      - "/app/node_modules"
-      - "./api:/app"
+    # volumes:
+    #   - "/app/node_modules"
+    #   - "./api:/app"
     depends_on:
       - postgres
     ports:
