@@ -4,6 +4,8 @@ WORKDIR /app
 
 COPY package.json /app
 
+COPY prisma ./app/prisma/
+
 RUN yarn install
 
 COPY . /app
