@@ -1,4 +1,4 @@
-version: '3.9'
+version: '3.3'
 
 services: 
   postgres:
@@ -16,9 +16,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    # volumes:
-    #   - "/app/node_modules"
-    #   - "./api:/app"
+
     depends_on:
       - postgres
     ports:
@@ -40,7 +38,5 @@ services:
       - 80:80
       - 443:443
 
-
 volumes:
   db:
-
