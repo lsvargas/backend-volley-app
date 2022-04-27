@@ -11,10 +11,11 @@ const parseListUsers = list => {
   }));
 };
 
-const parseUserTemplateList = ({ userId, templateListId, user }) => {
+const parseUserTemplateList = ({ id, userId, templateListId, user }) => {
   const { email, name, lastname } = user;
 
   return {
+    id,
     userId,
     email,
     name,

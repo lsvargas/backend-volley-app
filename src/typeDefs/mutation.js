@@ -12,6 +12,8 @@ const mutation = gql`
     deleteUser(id: ID!): User
     deleteList(id: ID!): List
     editUserList(userListId: ID! status: Int!): UserList
+    registerUser(name: String, email: String, password: String): AuthUser
+    loginUser(email: String, password: String): AuthUser
   }
 `;
 

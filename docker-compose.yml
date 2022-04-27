@@ -16,9 +16,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    # volumes:
-    #   - "/app/node_modules"
-    #   - "./api:/app"
+
     depends_on:
       - postgres
     ports:

@@ -6,7 +6,8 @@ const {
   listType,
   userListType,
   templateListType,
-  userTemplateListType
+  userTemplateListType,
+  authUserType
 } = require("./types");
 
 const { dateScalar } = require("./scalars/date");
@@ -19,7 +20,8 @@ const typeDefs = [
   userListType,
   templateListType,
   userTemplateListType,
-  templateListInputType
+  templateListInputType,
+  authUserType
 ];
 
 module.exports = {
