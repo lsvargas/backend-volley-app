@@ -27,7 +27,12 @@ const authResolvers = {
       const encryptedPassword = await bcrypt.hash(password, 10);
 
       const newUser = await prisma.User.create({
-        data: { name, email: email.toLowerCase(), password: encryptedPassword }
+        data: {
+          name,
+          email: email.toLowerCase(),
+          password: encryptedPassword,
+          isAdmin: true
+        }
       });
 
       const token = generateToken(newUser, email);

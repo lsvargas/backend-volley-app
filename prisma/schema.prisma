@@ -18,6 +18,7 @@ model User {
   lastname        String?
   second_lastname String?
   password        String?
+  isAdmin         Boolean @default(false)
 
   institutions UsersInstitutions[]
   lists UsersLists[]
@@ -69,6 +70,7 @@ model UsersLists {
   list          List @relation(fields: [listId], references: [id])
   listId        Int
   status        Int
+  waitingList   Boolean  @default(false)
   assignedAt    DateTime @default(now())
   assignedBy    String
 

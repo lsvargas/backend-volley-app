@@ -3,17 +3,6 @@ const { parseListUsers } = require('../utils/lists');
 
 const prisma = new PrismaClient();
 
-const assignUsersToList = (usersIds, listId) => {
-  return prisma.UsersTemplateLists.createMany({
-    data: usersIds.map(id => ({
-      userId: parseInt(id, 10),
-      templateListId: parseInt(listId, 10),
-      assignedBy: 'templateAssigned'
-    })),
-    skipDuplicates: true
-  });
-};
-
 const templateListsResolvers = {
   Query: {
     templateLists: async () => {

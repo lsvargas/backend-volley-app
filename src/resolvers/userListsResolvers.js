@@ -1,4 +1,5 @@
 const { PrismaClient } = require('@prisma/client');
+const { parseUserList } = require('../utils/lists');
 
 const prisma = new PrismaClient();
 
@@ -25,7 +26,30 @@ const userListsResolvers = {
       const userList = await prisma.UsersLists.delete({ where: { listId: parseInt(listId, 10),  userId: parseInt(userId, 10) }});
 
       return userList;
-    }
+    },
+    createUserList: async (parent, { listId, userId, waitingList }) => {
+      console.log(listId, userId, waitingList)
+      const userList = await prisma.UsersLists.create({
+        data: {
+          list: {
+            connect: {
+              id: parseInt(listId, 10)
+            }
+          },
+          user: {
+            connect: {
+              id: parseInt(userId, 10)
+            }
+          },
+          assignedBy: '',
+          waitingList,
+          status: 0
+        },
+        include: { user: true }
+      });
+
+      return parseUserList(userList);
+    },
   }
 };
 

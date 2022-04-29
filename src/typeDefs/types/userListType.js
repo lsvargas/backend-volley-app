@@ -10,6 +10,7 @@ const userListType = gql`
     email: String
     lastname: String
     secondLastname: String
+    waitingList: Boolean
   }
 `;
 

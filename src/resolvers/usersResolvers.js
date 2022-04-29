@@ -4,7 +4,9 @@ const prisma = new PrismaClient();
 
 const usersResolvers = {
   Query: {
-    users: () => prisma.User.findMany()
+    users: () => prisma.User.findMany({
+      where: { isAdmin: false }
+    })
   },
   Mutation: {
     createUser: async (parent, { name, lastname }) => {

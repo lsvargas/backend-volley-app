@@ -19,7 +19,12 @@ const assignUsersToList = (usersIds, listId) => {
 const listsResolvers = {
   Query: {
     lists: async () => {
-      const lists = await prisma.list.findMany({ include: { users: { include: { user: true } } } });
+      const lists = await prisma.list.findMany({
+        include: { users: { include: { user: true } } },
+        orderBy: {
+          date: 'asc'
+        }
+      });
 
       return parseListUsers(lists);
     },
@@ -33,7 +38,10 @@ const listsResolvers = {
     }
   },
   Mutation: {
-    createList: async (parent, { date, templateListId }) => {
+    createList: async (parent, a) => {
+      console.log(a)
+      const {date, templateListId} = a
+      console.log(date)
       const tList = await prisma.templateList.findUnique({ where: { id: parseInt(templateListId, 10) }, include: { users: { include: { user: true } } } });
 
       const list = await prisma.list.create({
