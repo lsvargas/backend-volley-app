@@ -28,7 +28,6 @@ const userListsResolvers = {
       return userList;
     },
     createUserList: async (parent, { listId, userId, waitingList }) => {
-      console.log(listId, userId, waitingList)
       const userList = await prisma.UsersLists.create({
         data: {
           list: {

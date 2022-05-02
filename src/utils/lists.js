@@ -1,12 +1,13 @@
 const parseListUsers = list => {
   return list.map(list => ({
     ...list,
-    users: list.users.map(({ status, user, id }) => ({
+    users: list.users.map(({ status, user, id, waitingList }) => ({
       id,
       userId: user.id,
       status,
       name: user.name,
-      lastname: user.lastname
+      lastname: user.lastname,
+      waitingList
     }))
   }));
 };

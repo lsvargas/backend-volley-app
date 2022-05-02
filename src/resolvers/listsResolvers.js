@@ -38,10 +38,7 @@ const listsResolvers = {
     }
   },
   Mutation: {
-    createList: async (parent, a) => {
-      console.log(a)
-      const {date, templateListId} = a
-      console.log(date)
+    createList: async (parent, { date, templateListId }) => {
       const tList = await prisma.templateList.findUnique({ where: { id: parseInt(templateListId, 10) }, include: { users: { include: { user: true } } } });
 
       const list = await prisma.list.create({
