@@ -26,6 +26,15 @@ const parseUserTemplateList = ({ id, userId, templateListId, user }) => {
 };
 
 
+const parseList = users => {
+  return users.map((user) => ({
+    ...user,
+    name: user.user.name,
+    lastname: user.user.lastname
+  }));
+}
+
+
 const parseUserList = ({ id, userId, listId, user, status, waitingList }) => {
   const { email, name, lastname } = user;
 
@@ -47,5 +56,6 @@ const parseUserList = ({ id, userId, listId, user, status, waitingList }) => {
 module.exports = {
   parseListUsers,
   parseUserTemplateList,
-  parseUserList
+  parseUserList,
+  parseList
 };

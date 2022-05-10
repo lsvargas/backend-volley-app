@@ -10,6 +10,7 @@ const listType = gql`
     description: String
     url: String
     users: [UserList]
+    closed: Boolean
   }
 `;
 

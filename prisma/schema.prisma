@@ -50,6 +50,7 @@ model List {
   name            String
   description     String
   url             String @default("")
+  closed          Boolean @default(false)
 
   users UsersLists[]
 }

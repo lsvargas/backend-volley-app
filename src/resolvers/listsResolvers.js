@@ -1,5 +1,5 @@
 const { PrismaClient } = require('@prisma/client');
-const { parseListUsers } = require('../utils/lists');
+const { parseListUsers, parseList } = require('../utils/lists');
 
 const prisma = new PrismaClient();
 
@@ -57,7 +57,17 @@ const listsResolvers = {
       const list = await prisma.List.delete({ where: { id: parseInt(id, 10) }});
 
       return list;
+    },
+    updateList: async (parent, { id, closed }) => {
+      const list = await prisma.list.update({
+        where: { id: parseInt(id, 10) },
+        data: { closed },
+        include: { users: { include: { user: true } } }
+      });
+
+      return { ...list, users: parseList(list.users) }; 
     }
+
   }
 };
 
