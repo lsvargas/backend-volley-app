@@ -33,7 +33,16 @@ const templateListsResolvers = {
       const list = await prisma.TemplateList.delete({ where: { id: parseInt(id, 10) }});
 
       return list;
-    }
+    },
+    reOrderTemplateList: async (parent, { id, newPriority }) => {
+      const list = await prisma.TemplateList.update({
+        where: { id: parseInt(id, 10) },
+        data: { priority: newPriority }
+        // include: { users: { include: { user: true } } }
+      });
+
+      return list;
+    },
   }
 };
 

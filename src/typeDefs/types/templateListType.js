@@ -5,6 +5,7 @@ const templateListType = gql`
     id: ID
     name: String
     description: String
+    priority: Int
     users: [UserTemplateList]
   }
 `;

@@ -15,6 +15,7 @@ const mutation = gql`
     editUserList(userListId: ID! status: Int!): UserList
     loginUser(email: String, password: String): AuthUser
     registerUser(name: String, email: String, password: String): AuthUser
+    reOrderTemplateList(id: ID!, newPriority: Int!): TemplateList
     updateList(id: ID!, closed: Boolean): List
   }
 `;
