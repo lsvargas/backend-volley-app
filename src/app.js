@@ -9,7 +9,7 @@ const server = new ApolloServer({
   resolvers,
   cors: {
     origin: [
-      "https://www.wildvoley.cl",
+      "https://app.wildvoley.cl",
       "http://localhost:3000",
       "https://wildvoley.cl"
     ]
